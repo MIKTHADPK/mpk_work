@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPK Digital Solutions</title>
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #333;
+            --background-light: #f4f7f6;
+            --text-light: #fff;
+            --transition: all 0.3s ease;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--secondary-color);
+        }
+
+        /* Navigation */
+        header {
+            background-color: var(--text-light);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            background-color: var(--text-light);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--background-light);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: auto;
+            background: var(--background-light);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-light);
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">MPK Digital</a>
+            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Transform Your Digital Presence</h1>
+        <p>Innovative solutions tailored for modern businesses. We build the technology that drives your growth.</p>
+        <a href="#contact" class="btn">Get Started</a>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Web Development</h3>
+                <p>Custom, responsive websites built with the latest technologies to ensure optimal performance and user experience.</p>
+            </div>
+            <div class="service-card">
+                <h3>System Automation</h3>
+                <p>Streamline your workflows and data management with tailored scripts, portals, and operational dashboards.</p>
+            </div>
+            <div class="service-card">
+                <h3>Digital Infrastructure</h3>
+                <p>Robust setup and maintenance of your digital assets to keep your business running smoothly and securely.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background-color: var(--background-light);">
+        <h2 class="section-title">About MPK Digital Solutions</h2>
+        <div style="text-align: center; max-width: 800px; margin: auto;">
+            <p>At MPK Digital Solutions, we bridge the gap between complex technology and practical business needs. With expertise across digital platforms, web development, and process automation, our goal is to deliver clean, efficient, and scalable solutions. Whether it's managing data processes or designing striking digital interfaces, we are committed to excellence in every project.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="Your Name">
+                <input type="email" name="email" placeholder="Your Email">
+                <input type="text" name="subject" placeholder="Subject">
+                <textarea name="message" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn" style="background-color: var(--primary-color); color: white;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> MPK Digital Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle logic
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active'); // Close mobile menu on click
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic Footer Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Contact Form Rapid Submission Logic
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Fire and forget data payload handling would go here.
+            // Example: fetch('YOUR_API_ENDPOINT', { method: 'POST', body: new FormData(this), mode: 'no-cors' });
+
+            alert('Your message has been rapidly processed. Thank you!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
