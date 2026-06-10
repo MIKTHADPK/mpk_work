@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Appointment | VITALIX Homoeopathy &amp; Wellness</title>
+    <meta name="description" content="Book an online homoeopathic consultation with VITALIX Homoeopathy & Wellness.">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="top-strip"><div class="container top-strip__grid"><div class="top-strip__item"><span class="top-strip__icon"><i data-lucide="map-pin"></i></span><div><strong>Location</strong><span>Mongam, Malappuram, Kerala 673642</span></div></div><div class="top-strip__item"><span class="top-strip__icon"><i data-lucide="phone"></i></span><div><strong>Contact</strong><span>+91 9605524749 / +91 9647511805</span></div></div><div class="top-strip__item"><span class="top-strip__icon"><i data-lucide="clock-3"></i></span><div><strong>Consultation</strong><span>Online by WhatsApp or call</span></div></div><a class="button button--accent top-strip__button" href="appointment.html"><i data-lucide="calendar-plus"></i><span>Book Appointment</span></a></div></div>
+      <nav class="navbar" aria-label="Primary navigation"><div class="container navbar__inner"><a class="brand" href="index.html" aria-label="VITALIX home"><img src="assets/images/vitalix-logo.png" alt="VITALIX Homoeopathy & Wellness logo"></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"><i data-lucide="menu"></i><span class="sr-only">Menu</span></button><ul class="nav-menu" id="primary-menu"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a class="is-active" href="appointment.html">Appointment</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+    </header>
+
+    <main id="main">
+      <section class="appointment-hero">
+        <div class="container appointment-layout">
+          <aside class="appointment-aside reveal">
+            <span class="eyebrow">Your Homeopath In Kerala</span>
+            <h1>Make an appointment</h1>
+            <ul>
+              <li><i data-lucide="shield-check"></i><span>Individualized case taking</span></li>
+              <li><i data-lucide="message-circle"></i><span>Consultation through WhatsApp or call</span></li>
+              <li><i data-lucide="pill"></i><span>Medicine query support when needed</span></li>
+            </ul>
+            <div class="appointment-callout">
+              <strong>Quick Contact</strong>
+              <a href="tel:+919605524749">+91 9605524749</a>
+              <a href="tel:+919647511805">+91 9647511805</a>
+            </div>
+          </aside>
+
+          <section class="appointment-form-panel reveal reveal--delay" aria-labelledby="appointment-form-title">
+            <span class="eyebrow">Book Online</span>
+            <h2 id="appointment-form-title">Appointment form</h2>
+            <form class="clinic-form" data-clinic-form="appointment">
+              <input type="hidden" name="formType" value="Appointment">
+              <div class="form-row">
+                <label for="fullName">Full Name</label>
+                <input id="fullName" name="fullName" type="text" autocomplete="name" required>
+              </div>
+              <div class="form-grid">
+                <div class="form-row">
+                  <label for="phone">Phone Number</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="form-row">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" autocomplete="email">
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-row">
+                  <label for="ageGender">Age &amp; Gender</label>
+                  <input id="ageGender" name="ageGender" type="text" placeholder="Example: 32, Female" required>
+                </div>
+                <div class="form-row">
+                  <label for="consultationType">Consultation Type</label>
+                  <select id="consultationType" name="consultationType" required>
+                    <option value="">Select type</option>
+                    <option>Online Consultation</option>
+                    <option>Chronic Disease Management</option>
+                    <option>Paediatric Care</option>
+                    <option>Women's Health</option>
+                    <option>Medicine Query</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-row">
+                  <label for="preferredDate">Preferred Date</label>
+                  <input id="preferredDate" name="preferredDate" type="date">
+                </div>
+                <div class="form-row">
+                  <label for="preferredMode">Preferred Mode</label>
+                  <select id="preferredMode" name="preferredMode">
+                    <option>WhatsApp</option>
+                    <option>Phone Call</option>
+                    <option>Video Call</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="complaint">Chief Complaint / Health Issue</label>
+                <textarea id="complaint" name="complaint" rows="5" required></textarea>
+              </div>
+              <button class="button button--primary" type="submit">
+                <i data-lucide="send"></i>
+                <span>Submit Appointment</span>
+              </button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><img class="footer-logo" src="assets/images/vitalix-logo.png" alt="VITALIX Homoeopathy & Wellness logo"><p>Holistic and individualized homoeopathic treatment for natural, long-term wellness.</p></div>
+        <div><h2>Quick Links</h2><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+        <div><h2>Reach Us</h2><p>Mongam, Malappuram, Kerala 673642</p><a href="tel:+919605524749">+91 9605524749</a><a href="tel:+919647511805">+91 9647511805</a><a href="mailto:hrithikhtithik@gmail.com">hrithikhtithik@gmail.com</a></div>
+      </div>
+      <div class="footer-bottom"><div class="container"><span>Copyright 2026 VITALIX Homoeopathy & Wellness.</span><span>For emergencies, seek urgent medical care.</span></div></div>
+    </footer>
+    <a class="whatsapp-float" href="https://wa.me/919605524749" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+  </body>
+</html>
