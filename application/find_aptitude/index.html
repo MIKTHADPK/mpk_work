@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:type" content="Find Aptitude by MPK Digital Solutions">
+    <meta property="og:url" content="https://mpk.work.gd/">
+    <meta property="og:title" content="Find Your Aptitude">
+    <meta property="og:description" content="MPK Digital Solutions | Find Aptitude">
+    <meta property="og:image" content="https://mpk.work.gd/application/find_aptitude/find_aptitude.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="436">
+    <meta property="og:image:height" content="234">
+    <link rel="icon" href="https://mikthadpk.github.io/form/asset/icons/Saadiya-Icon.ico">
+
+    <title>Aptitude Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="welcome-modal" class="modal-overlay">
+    <div class="modal-content">
+        <i class="fas fa-compass modal-icon"></i>
+        <h2>കരിയറിന്റെ വഴികളിൽ നിങ്ങളുടെ ശരിയായ വഴി കണ്ടെത്താൻ പ്രയാസപ്പെടുന്നോ?.....</h2>
+        <p>ഞാൻ നിങ്ങളെ സഹായിക്കാം.</p>
+        <button class="btn-start" onclick="closeModal()">തുടങ്ങുക (Start)</button>
+    </div>
+</div>
+
+<div class="app-container">
+    <header class="header">
+        <h1>അഭിരുചി പരീക്ഷ</h1>
+        <p>നിങ്ങളുടെ അനുയോജ്യമായ കരിയർ കണ്ടെത്തുക</p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </header>
+
+    <div id="quiz-container">
+        <form id="aptitude-form">
+            <div id="questions-wrapper"></div>
+            
+            <div class="pagination-controls">
+                <button type="button" id="btn-prev" class="btn-nav hidden" onclick="prevPage()">മുൻപത്തെ (Previous)</button>
+                <button type="button" id="btn-next" class="btn-nav" onclick="nextPage()">അടുത്തത് (Next)</button>
+                <button type="button" id="btn-submit" class="btn-submit hidden" onclick="calculateAptitude()">ഫലം അറിയുക (Find Aptitude)</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="result-container" class="hidden">
+        <div id="capture-area">
+            <h2 class="result-title">നിങ്ങളുടെ ഫലം (Your Results)</h2>
+            
+            <div class="chart-container">
+                <canvas id="resultChart"></canvas>
+            </div>
+
+            <div id="top-results"></div>
+        </div>
+        
+        <div class="action-buttons no-print">
+            <button class="btn-action btn-download" onclick="downloadScreenshot()">
+                <i class="fas fa-download"></i> Download Result
+            </button>
+            <button class="btn-action btn-whatsapp" onclick="shareOnWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

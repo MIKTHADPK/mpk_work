@@ -1,0 +1,218 @@
+       :root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --whatsapp: #25D366;
+    --error: #EF4444;
+}
+
+body {
+    font-family: 'Noto Sans Malayalam', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    background: var(--card-bg);
+    max-width: 800px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* Modal / Popup Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    animation: fadeInScale 0.4s ease-out;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.modal-content h2 {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+
+.btn-start {
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-family: 'Noto Sans Malayalam', sans-serif;
+}
+
+@keyframes fadeInScale {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    background: #E5E7EB;
+    border-radius: 8px;
+    height: 10px;
+    margin-top: 15px;
+}
+.progress-bar {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 8px;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+/* Question Cards & Validation */
+.question-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.question-card.error-border {
+    border: 2px solid var(--error);
+    background: #FEF2F2;
+}
+.error-msg {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+}
+.error-border .error-msg { display: block; }
+
+.question-text { font-size: 1.1rem; font-weight: 500; margin-bottom: 15px; }
+
+/* Question Cards & Validation */
+.question-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.question-card.error-border {
+    border: 2px solid var(--error);
+    background: #FEF2F2;
+}
+.error-msg {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+}
+.error-border .error-msg { display: block; }
+
+.question-text { 
+    font-size: 1.1rem; 
+    font-weight: 500; 
+    margin-bottom: 15px; 
+}
+
+/* Updated Radio Group Layout for Sub-labels */
+.radio-group { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 6px; 
+}
+
+.radio-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.radio-item label {
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+.radio-group input[type="radio"] { display: none; }
+.radio-group input[type="radio"]:checked + label {
+    background: var(--primary); 
+    color: white; 
+    border-color: var(--primary);
+}
+
+/* Styles for "തീരെ ഇല്ല" and "വളരെ അധികം" */
+.scale-label {
+    font-size: 0.75rem;
+    color: #6B7280;
+    margin-top: 6px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Pagination & Buttons */
+.pagination-controls { display: flex; gap: 15px; margin-top: 20px; }
+.btn-nav, .btn-submit {
+    flex: 1; padding: 15px; font-size: 1.1rem; color: white;
+    border: none; border-radius: 8px; cursor: pointer; font-family: inherit;
+}
+.btn-nav { background: #6B7280; }
+.btn-submit { background: var(--primary); }
+.hidden { display: none !important; }
+
+/* Results & Chart */
+.chart-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+.result-item {
+    background: #F3F4F6; padding: 15px; border-radius: 8px;
+    border-left: 5px solid var(--primary); margin-bottom: 15px;
+}
+.action-buttons { display: flex; gap: 15px; margin-top: 25px; }
+.btn-action {
+    flex: 1; padding: 12px; font-size: 1rem; border: none; border-radius: 8px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: white;
+}
+.btn-download { background: var(--primary); }
+.btn-whatsapp { background: var(--whatsapp); }
+
+/* Print Styling */
+@media print {
+    body { background: white; }
+    .app-container { box-shadow: none; padding: 0; }
+    .no-print { display: none !important; }
+}
