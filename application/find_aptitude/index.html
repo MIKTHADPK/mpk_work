@@ -28,16 +28,16 @@
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content">
         <i class="fas fa-compass modal-icon"></i>
-        <h2>കരിയറിന്റെ വഴികളിൽ നിങ്ങളുടെ ശരിയായ വഴി കണ്ടെത്താൻ പ്രയാസപ്പെടുന്നോ?.....</h2>
-        <p>ഞാൻ നിങ്ങളെ സഹായിക്കാം.</p>
-        <button class="btn-start" onclick="closeModal()">തുടങ്ങുക (Start)</button>
+        <h2>Confused about your future career?.....</h2>
+        <p>Let’s discover it together.</p>
+        <button class="btn-start" onclick="closeModal()">Start</button>
     </div>
 </div>
 
 <div class="app-container">
     <header class="header">
-        <h1>അഭിരുചി പരീക്ഷ</h1>
-        <p>നിങ്ങളുടെ അനുയോജ്യമായ കരിയർ കണ്ടെത്തുക</p>
+        <h1>Aptitude Test</h1>
+        <p>Shape Your Professional Future</p>
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
@@ -48,16 +48,16 @@
             <div id="questions-wrapper"></div>
             
             <div class="pagination-controls">
-                <button type="button" id="btn-prev" class="btn-nav hidden" onclick="prevPage()">മുൻപത്തെ (Previous)</button>
-                <button type="button" id="btn-next" class="btn-nav" onclick="nextPage()">അടുത്തത് (Next)</button>
-                <button type="button" id="btn-submit" class="btn-submit hidden" onclick="calculateAptitude()">ഫലം അറിയുക (Find Aptitude)</button>
+                <button type="button" id="btn-prev" class="btn-nav hidden" onclick="prevPage()">Previous</button>
+                <button type="button" id="btn-next" class="btn-nav" onclick="nextPage()">Next</button>
+                <button type="button" id="btn-submit" class="btn-submit hidden" onclick="calculateAptitude()">Find Result</button>
             </div>
         </form>
     </div>
 
     <div id="result-container" class="hidden">
         <div id="capture-area">
-            <h2 class="result-title">നിങ്ങളുടെ ഫലം (Your Results)</h2>
+            <h2 class="result-title">Your Results</h2>
             
             <div class="chart-container">
                 <canvas id="resultChart"></canvas>
