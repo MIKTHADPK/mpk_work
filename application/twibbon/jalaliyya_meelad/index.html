@@ -59,12 +59,22 @@
     #scaleSlider { width: 100%; accent-color: var(--navy); height: 6px; cursor: pointer; }
 
     /* Download Footer */
-    .footer-action { padding: 20px; }
-    .download-btn {
-      width: 100%; background: var(--navy); color: white; padding: 18px; border: none;
-      border-radius: 8px; font-size: 1.3rem; font-weight: 800; letter-spacing: 2px; cursor: pointer;
+.footer-action { 
+      padding: 20px; 
+      display: flex; 
+      gap: 15px; /* Space between buttons */
     }
-    .download-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    .download-btn, .share-btn {
+      flex: 1; /* Makes both buttons take up equal half of the space */
+      color: white; padding: 15px 5px; border: none;
+      border-radius: 8px; font-size: 1.1rem; font-weight: 800; letter-spacing: 1px; cursor: pointer;
+    }
+    
+    .download-btn { background: var(--navy); }
+    .share-btn { background: var(--navy); } /* WhatsApp Green for sharing */
+    
+    .download-btn:disabled, .share-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 
     .scroll-controls {
@@ -76,15 +86,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: white;
-  padding: 10px 15px;
+  padding: 1px 1px;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  gap: 5px;
+  gap: 0px;
 }
 
 .scroll-controls i {
-  font-size: 36px;
+  font-size: 25px;
   color: var(--navy);
   cursor: pointer;
   transition: transform 0.2s;
@@ -159,8 +168,13 @@
   </div>
 
   <!-- 4. Download Button -->
-  <div class="footer-action">
-    <button class="download-btn" id="downloadBtn" disabled>DOWNLOAD</button>
+<div class="footer-action">
+    <button class="share-btn" id="shareBtn" disabled>
+      <i class="fa-solid fa-share-nodes"></i> SHARE
+    </button>
+    <button class="download-btn" id="downloadBtn" disabled>
+      <i class="fa-solid fa-download"></i> DOWNLOAD
+    </button>
   </div>
 
 <!--Footer - MPK Brandign -->
@@ -238,6 +252,7 @@
         document.getElementById('scaleSlider').value = scale;
         draw();
         document.getElementById('downloadBtn').disabled = false;
+        document.getElementById('shareBtn').disabled = false;
       };
       userImg.src = f.target.result;
     };
@@ -396,6 +411,52 @@
     a.download = 'Jalaliyya_Meelad.png';
     a.href = out.toDataURL('image/png', 1.0);
     a.click();
+  });
+
+  // Share Output
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    // 1. Generate the final canvas (same process as downloading)
+    const out = document.createElement('canvas');
+    out.width = EXPORT_SIZE_Width; 
+    out.height = EXPORT_SIZE_Height;
+    const octx = out.getContext('2d');
+    
+    const w = (userImg.width * scale) * SCALE_RATIO;
+    const h = (userImg.height * scale) * SCALE_RATIO;
+    octx.save();
+    octx.translate((pos.x * SCALE_RATIO) + w/2, (pos.y * SCALE_RATIO) + h/2);
+    octx.rotate(rotation * Math.PI / 180);
+    octx.drawImage(userImg, -w/2, -h/2, w, h);
+    octx.restore();
+    octx.drawImage(frameImg, 0, 0, EXPORT_SIZE_Width, EXPORT_SIZE_Height);
+
+    // 2. Convert canvas to a File and use the Web Share API
+    out.toBlob(async (blob) => {
+      if (!blob) return;
+      
+      const file = new File([blob], 'Jalaliyya_Meelad.png', { type: 'image/png' });
+      
+      // Setup the text, title, and link for sharing
+      const shareData = {
+        title: 'Jalaliyya Meelad 2026',
+        text: 'Join me in celebrating Jalaliyya Meelad! Create your personalized photo frame here:',
+        url: 'https://mpk.work.gd/application/twibbon/jalaliyya_meelad/',
+        files: [file]
+      };
+
+      // 3. Check if the device supports sharing files
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          // Users might cancel the share sheet, so we silently catch the error
+          console.log('Share canceled or failed:', err);
+        }
+      } else {
+        // Fallback for older browsers (like Desktop Chrome sometimes)
+        alert("Your browser doesn't support direct image sharing. Please click Download and share it manually!");
+      }
+    }, 'image/png');
   });
 </script>
 </body>
