@@ -19,8 +19,9 @@
   <meta name="twitter:description" content="Create your personalized photo frame">
   <meta name="twitter:image" content="https://https://mpk.work.gd/application/twibbon/jalaliyya_meelad/participant_frame-thumb.png">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <title>Umeriyyath 33rd Anniversary</title>
+  <title>Jalaliyya Meelad Fest 2026</title>
   <link rel="stylesheet" href="https://googleapis.com">
   <style>
     :root { --navy: #640203; --light-bg: #f0f2f5; }
@@ -64,6 +65,41 @@
       border-radius: 8px; font-size: 1.3rem; font-weight: 800; letter-spacing: 2px; cursor: pointer;
     }
     .download-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+
+    .scroll-controls {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  gap: 5px;
+}
+
+.scroll-controls i {
+  font-size: 36px;
+  color: var(--navy);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.scroll-controls i:active {
+  transform: scale(0.8); /* Creates a satisfying "click" animation */
+}
+
+.scroll-controls span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #555;
+  letter-spacing: 1px;
+}
 
     /*Footer*/
          .footer{ margin-top: 15px; padding-top: 12px; border-top: 1px solid #eee; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #555; justify-content: center; } 
@@ -141,17 +177,22 @@
   </div>
 </div>
 
+<div class="scroll-controls">
+  <i class="fa-solid fa-angle-up" id="moveUpBtn"></i>
+  <span>SCROLL</span>
+  <i class="fa-solid fa-angle-down" id="moveDownBtn"></i>
+</div>
+
 </div>
 
 <script>
-const canvas = document.getElementById('twibbonCanvas');
+  const canvas = document.getElementById('twibbonCanvas');
   const ctx = canvas.getContext('2d');
+  
   const EXPORT_SIZE_Width = 935;
   const EXPORT_SIZE_Height = 1600;
-  const DISPLAY_SIZE_Width = 350; // Size on phone screen
-  const DISPLAY_SIZE_Height = 599; // Size on phone screen
-  
-  // FIXED: Divide width by width
+  const DISPLAY_SIZE_Width = 250; 
+  const DISPLAY_SIZE_Height = 428; 
   const SCALE_RATIO = EXPORT_SIZE_Width / DISPLAY_SIZE_Width;
 
   canvas.width = DISPLAY_SIZE_Width;
@@ -159,10 +200,10 @@ const canvas = document.getElementById('twibbonCanvas');
 
   let userImg = new Image(), frameImg = new Image();
   let dragging = false, offsetX = 0, offsetY = 0;
-  let pos = { x: 50, y: 50 }, scale = 1, rotation = 0;
+  let pos = { x: -30, y: 100 }, scale = 1, rotation = 0;
   let userImgLoaded = false;
 
-  // Load Frame (Replace with your direct PNG link)
+  // Load Frame
   frameImg.crossOrigin = "anonymous";
   frameImg.onload = () => draw();
   frameImg.src = './participant_frame.png';
@@ -174,23 +215,26 @@ const canvas = document.getElementById('twibbonCanvas');
       const w = userImg.width * scale;
       const h = userImg.height * scale;
       ctx.translate(pos.x + w/2, pos.y + h/2);
-      
-      // FIXED: Math.PI / 180 for correct 90-degree rotations
       ctx.rotate(rotation * Math.PI / 180); 
-      
       ctx.drawImage(userImg, -w/2, -h/2, w, h);
       ctx.restore();
     }
     ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
   }
 
-  document.getElementById('userPhoto').onchange = (e) => {
+  // Handle Photo Upload & Auto-Center
+  document.getElementById('userPhoto').addEventListener('change', (e) => {
     const reader = new FileReader();
     reader.onload = (f) => {
       userImg = new Image();
       userImg.onload = () => {
         userImgLoaded = true;
         scale = DISPLAY_SIZE_Width / userImg.width;
+        
+        // Auto-center the image horizontally and vertically
+        pos.x = (canvas.width - (userImg.width * scale)) / 2;
+        pos.y = (canvas.height - (userImg.height * scale)) / 2;
+        
         document.getElementById('scaleSlider').value = scale;
         draw();
         document.getElementById('downloadBtn').disabled = false;
@@ -200,14 +244,25 @@ const canvas = document.getElementById('twibbonCanvas');
     if(e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
     }
-  };
+  });
 
-  // Buttons & Slider
-  document.getElementById('rotateLeftBtn').onclick = () => { rotation -= 90; draw(); };
-  document.getElementById('rotateRightBtn').onclick = () => { rotation += 90; draw(); };
-  document.getElementById('scaleSlider').oninput = (e) => { scale = parseFloat(e.target.value); draw(); };
+  // Action Buttons & Slider
+  document.getElementById('rotateLeftBtn').addEventListener('click', () => { rotation -= 90; draw(); });
+  document.getElementById('rotateRightBtn').addEventListener('click', () => { rotation += 90; draw(); });
+  document.getElementById('scaleSlider').addEventListener('input', (e) => { scale = parseFloat(e.target.value); draw(); });
 
-  // Mouse/Touch Dragging
+  // Webpage Scroll Buttons
+  document.getElementById('moveUpBtn').addEventListener('click', (e) => { 
+    e.preventDefault();
+    window.scrollBy({ top: -400, behavior: 'smooth' }); 
+  });
+  
+  document.getElementById('moveDownBtn').addEventListener('click', (e) => { 
+    e.preventDefault();
+    window.scrollBy({ top: 400, behavior: 'smooth' });
+  });
+
+  // Mouse/Touch Dragging Logic
   function getPos(e) {
     const r = canvas.getBoundingClientRect();
     const cx = e.touches ? e.touches[0].clientX : e.clientX;
@@ -215,7 +270,6 @@ const canvas = document.getElementById('twibbonCanvas');
     return { x: cx - r.left, y: cy - r.top };
   }
 
-  // Handle Mouse (PC)
   canvas.addEventListener('mousedown', (e) => {
     if (!userImgLoaded) return;
     dragging = true;
@@ -224,7 +278,6 @@ const canvas = document.getElementById('twibbonCanvas');
     offsetY = m.y - pos.y;
   });
 
-  // Handle Touch (Mobile)
   canvas.addEventListener('touchstart', (e) => {
     if (!userImgLoaded) return;
     if (e.target === canvas) {
@@ -256,7 +309,7 @@ const canvas = document.getElementById('twibbonCanvas');
   window.addEventListener('mouseup', () => dragging = false);
   window.addEventListener('touchend', () => dragging = false);
 
-  // Mouse Wheel & Pinch Zoom Logic
+  // Mouse Wheel & Pinch Zoom
   canvas.addEventListener('wheel', (e) => {
     if (!userImgLoaded) return;
     e.preventDefault();
@@ -269,16 +322,14 @@ const canvas = document.getElementById('twibbonCanvas');
     }
   }, { passive: false });
 
-  canvas.ondblclick = () => {
+  canvas.addEventListener('dblclick', () => {
     if (!userImgLoaded) return;
-    // FIXED: Changed DISPLAY_SIZE to DISPLAY_SIZE_Width
     scale = DISPLAY_SIZE_Width / userImg.width; 
     document.getElementById('scaleSlider').value = scale;
     draw();
-  };
+  });
 
   let initialPinchDist = null;
-
   function getPinchDist(e) {
     return Math.hypot(
       e.touches[0].pageX - e.touches[1].pageX,
@@ -288,9 +339,8 @@ const canvas = document.getElementById('twibbonCanvas');
 
   canvas.addEventListener('touchstart', (e) => {
     if (!userImgLoaded) return;
-    if (e.target === canvas) {
-      e.preventDefault(); 
-    }
+    if (e.target === canvas) e.preventDefault(); 
+    
     if (e.touches.length === 1) {
       dragging = true;
       const m = getPos(e.touches[0]);
@@ -304,9 +354,8 @@ const canvas = document.getElementById('twibbonCanvas');
 
   canvas.addEventListener('touchmove', (e) => {
     if (!userImgLoaded) return;
-    if (e.target === canvas) {
-      e.preventDefault();
-    }
+    if (e.target === canvas) e.preventDefault();
+    
     if (e.touches.length === 1 && dragging) {
       const m = getPos(e.touches[0]);
       pos.x = m.x - offsetX;
@@ -326,21 +375,9 @@ const canvas = document.getElementById('twibbonCanvas');
     }
   }, { passive: false });
 
-  // Fix Mobile Button taps
-  const btns = ['rotateLeftBtn', 'rotateRightBtn', 'downloadBtn'];
-  btns.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('touchstart', (e) => {
-        setTimeout(() => el.click(), 10); 
-      }, { passive: true });
-    }
-  });
-
-  // High-Res Download
-  document.getElementById('downloadBtn').onclick = () => {
+  // Download Output
+  document.getElementById('downloadBtn').addEventListener('click', () => {
     const out = document.createElement('canvas');
-    // FIXED: Replaced EXPORT_SIZE with Width and Height variables
     out.width = EXPORT_SIZE_Width; 
     out.height = EXPORT_SIZE_Height;
     const octx = out.getContext('2d');
@@ -353,14 +390,13 @@ const canvas = document.getElementById('twibbonCanvas');
     octx.drawImage(userImg, -w/2, -h/2, w, h);
     octx.restore();
     
-    // FIXED: Replaced EXPORT_SIZE with Width and Height variables
     octx.drawImage(frameImg, 0, 0, EXPORT_SIZE_Width, EXPORT_SIZE_Height);
 
     const a = document.createElement('a');
     a.download = 'Jalaliyya_Meelad.png';
     a.href = out.toDataURL('image/png', 1.0);
     a.click();
-  };
+  });
 </script>
 </body>
 </html>
